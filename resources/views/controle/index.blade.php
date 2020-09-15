@@ -11,13 +11,12 @@
                 <thead class=" bg-success text-center">
                     <tr>
                         <th>Site</th>
-                        <th>Conso</th>
-                        <th>Date Livraison</th>
-                        <th>Durée Conso</th>
-                        <th>Durée Fnmt</th>
-                        <th>Conso Moyenne</th>
-                        <th>Durée Fnmt(J)</th>
-                        <th>Conso (J)</th>
+                        <th>Conso Total</th>
+                        <th>Nbre Jour</th>
+                        <th>Durée Fnmt GE (H)</th>
+                        <th>Conso Moyenne(L/H)</th>
+                        <th>Durée Fnmt (J)</th>
+                        <th>Conso (L/J)</th>
                                          
                     </tr>
                 </thead>
@@ -26,7 +25,6 @@
                         <tr>
                             <td>{{$controle->nomSite}}</td>
                             <td>{{$controle->conso}}</td>
-                            <td>{{$controle->date_livraison}}</td>
                             <td>{{$controle->duree_conso_jour}}</td>
                             <td>{{$controle->duree_fonctionnement_ge}}</td>
                             <td>{{$controle->conso_moyenne}}</td>

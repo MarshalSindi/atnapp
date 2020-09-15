@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h4>Relever:</h4>
+    <h4>Livraison:</h4>
     
        
     <div class="row">
