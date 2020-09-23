@@ -6,6 +6,7 @@ use App\Site;
 use App\Controle;
 use App\Livraison;
 use App\Relever;
+use Twilio\Rest\Client;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,7 @@ class ReleverController extends Controller
     {
         $relevers = DB::table('sites')
                     ->join('relevers', 'sites.id', '=', 'relevers.site_id')
-                    ->paginate(15);
+                    ->paginate(10);
         return view('relever.index')->with('relevers', $relevers);
     }
 
@@ -55,22 +56,42 @@ class ReleverController extends Controller
         $relever->date_relever = $request->input('date_relever');
         $relever->qte_relever = $request->input('qte_relever');
         $relever->compteur = $request->input('compteur');
-        $relever->save();
+        $site = Site::find($relever->site_id);
+        
+
+        // if($relever->qte_relever <= 150){
             
-        $livraison = Livraison::find($relever->site_id)->latest('id')->first();
-        $date2=\Carbon\Carbon::parse($relever->date_relever);
-        $date1= \Carbon\Carbon::parse($livraison->date_livraison);
+        //     $sid = 'AC04bc22c67e320f1fd9b92bc9a637eede';
+        //      $token = 'e441d51a5fd08d0c43b68815e697a303'; 
+        //      $client = new Client($sid, $token);
+        //      $client->messages->create(
+        //              '+22794000434',
+        //              [
+        //                  'from'=> '+12564726375', 
+        //                  'body'=> 'Alerte '.$relever->site->nomSite.' a '.$relever->qte_relever.'L'
+        //              ]
+        //              );
+        // }
+        $relever->save();
+         
+        if(Livraison::find($relever->site_id))
+        {
+            $livraison = Livraison::find($relever->site_id)->latest('id')->first();
+            $date2=\Carbon\Carbon::parse($relever->date_relever);
+            $date1= \Carbon\Carbon::parse($livraison->date_livraison);
+          
+            $controle = new Controle;
+            $controle->site_id = $relever->site_id;
+            $controle->conso =  $livraison->total - $relever->qte_relever;
+            $controle->duree_conso_jour = $date1->diffInDays($date2, false);
+            
+            $controle->duree_fonctionnement_ge = $relever->compteur - $livraison->compteur;
+            $controle->conso_moyenne = $controle->conso / $controle->duree_fonctionnement_ge;
+            $controle->duree_fonctionnement_ge_jour = $controle->duree_fonctionnement_ge / $controle->duree_conso_jour;
+            $controle->conso_site_jour = $controle->conso / $controle->duree_conso_jour;
+            $controle->save();
+        } 
         
-        $controle = new Controle;
-        $controle->site_id = $relever->site_id;
-        $controle->conso =  $livraison->total - $relever->qte_relever;
-        $controle->duree_conso_jour = $date1->diffInDays($date2, false);
-        
-        $controle->duree_fonctionnement_ge = $relever->compteur - $livraison->compteur;
-        $controle->conso_moyenne = $controle->conso / $controle->duree_fonctionnement_ge;
-        $controle->duree_fonctionnement_ge_jour = $controle->duree_fonctionnement_ge / $controle->duree_conso_jour;
-        $controle->conso_site_jour = $controle->conso / $controle->duree_conso_jour;
-        $controle->save();
 
         return redirect('/relever');
     }

@@ -25,7 +25,7 @@
                     @endforeach
                 </tbody>
             </table>
-            
+             {{-- {{$sites->links()}} --}}
         </div>
     </div>
 @endsection

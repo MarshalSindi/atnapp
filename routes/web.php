@@ -13,9 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 Route::resource('region', 'RegionController');
 Route::resource('typesite', 'Type_siteController');
 Route::resource('field', 'FieldController');
@@ -27,4 +24,4 @@ Route::resource('livraison', 'LivraisonController');
 Route::resource('controle', 'ControleController');
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');

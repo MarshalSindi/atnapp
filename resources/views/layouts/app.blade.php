@@ -18,11 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-     <link rel="stylesheet" href="{{asset('fontawesome/css/all.css')}}">
-    <link rel="stylesheet" href="{{asset('DataTables/datatables.min.css')}}">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('fontawesome/css/all.css')}}">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 </head>
 <body>
@@ -150,16 +146,18 @@
                     </div>
                 </nav>
             <main class="col-md-10 py-4">
+                @include('layouts.flash-messages')
+                
                 @yield('content')
             </main>
         </div>
           </div>
 </body>
     <script src="{{asset('jquery.min.js')}}"></script>
-    <script src="{{asset('js/popper.min.js')}}"></script>
-    <script src="{{asset('DataTables/datatables.min.js')}}"></script>
-    <script src="{{asset('js/bootstrap-datepicker.min.js')}}"></script>
+    {{-- <script src="{{asset('js/popper.min.js')}}"></script> --}}
+    {{-- <script src="{{asset('DataTables/datatables.min.js')}}"></script>
+    <script src="{{asset('js/bootstrap-datepicker.min.js')}}"></script> --}}
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-    {{-- <script src="{{ asset('js/app.js') }}" defer></script>  --}}
+    {{-- <script src="{{ asset('js/app.js') }}" defer></script>   --}}
     @yield('script')
 </html>

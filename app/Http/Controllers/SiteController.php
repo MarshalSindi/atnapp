@@ -62,16 +62,18 @@ class SiteController extends Controller
         $site->type_site_id = $request->input('type_site_id');
         $site->field_id = $request->input('field_id');
         $site->localite_id = $request->input('localite_id');
-        $sid = 'AC04bc22c67e320f1fd9b92bc9a637eede';
-        $token = '9632ef5f6010a8898e0b76f7724439b9'; 
-        $client = new Client($sid, $token);
-        $client->messages->create(
-            '+22794000434',
-            [
-                'from'=> '+12564726375',
-                'body'=> 'Super le site '.$site->nomSite.' est créer'
-            ]
-            );
+
+        //Twilio SMS API
+        // $sid = 'AC04bc22c67e320f1fd9b92bc9a637eede';
+        // $token = 'e441d51a5fd08d0c43b68815e697a303'; 
+        // $client = new Client($sid, $token);
+        // $client->messages->create(
+        //     '+22794000434',
+        //     [
+        //         'from'=> '+12564726375', 
+        //         'body'=> 'Super le site '.$site->nomSite.' est créer'
+        //     ]
+        //     );
         $site->save();
 
         return redirect('/site');

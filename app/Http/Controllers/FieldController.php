@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 
 class FieldController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +22,7 @@ class FieldController extends Controller
     public function index()
     {
         $fields = DB::table('fields')->paginate(10);
-        return view('field.index')->with('fields', $fields);
+        return view('field.index')->with('fields', $fields)->with('success', 'Cool');
     }
 
     /**
@@ -41,14 +45,14 @@ class FieldController extends Controller
     {
         $this->validate($request, [
             'nomField' => 'required',
-            'telephone' => 'required'
+            'telephone' => 'required|unique:fields'
         ]);
 
         $field = new Field;
         $field->nomField = $request->input('nomField');
         $field->telephone = $request->input('telephone');
         $field->save();
-        return redirect('/field');
+        return redirect('/field')->with('success', 'Cool');
     }
 
     /**
@@ -93,7 +97,7 @@ class FieldController extends Controller
         $field->nomField = $request->input('nomField');
         $field->telephone = $request->input('telephone');
         $field->save();
-        return redirect('/field');
+        return redirect('/field')->with('success', 'Modification réussis!');
     }
 
     /**

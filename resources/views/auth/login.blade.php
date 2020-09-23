@@ -1,11 +1,12 @@
-@extends('layouts.app')
-
-@section('content')
+{{-- @extends('layouts.app') --}}
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+<link rel="stylesheet" href="{{asset('fontawesome/css/all.css')}}">
+{{-- @section('content') --}}
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-8 align-items-center">
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+                <div class="card-header bg-success"><i class="fas fa-gas-pump"></i> {{ __('EnergeTic') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
@@ -70,4 +71,4 @@
         </div>
     </div>
 </div>
-@endsection
+{{-- @endsection --}}
