@@ -17,6 +17,8 @@ class CreateSitesTable extends Migration
             $table->id();
             $table->string('nomSite');
             $table->integer('localite_id');
+            $table->decimal('longitude', 11,5);
+            $table->decimal('latitude', 10,5);
             $table->integer('type_site_id');
             $table->integer('field_id');
             $table->timestamps();

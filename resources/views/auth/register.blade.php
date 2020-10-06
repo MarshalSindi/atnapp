@@ -1,11 +1,13 @@
-@extends('layouts.app')
-
-@section('content')
+{{-- @extends('layouts.app') --}}
+<link href="{{ asset('css/app.css') }}" rel="stylesheet">
+<link rel="stylesheet" href="{{asset('fontawesome/css/all.css')}}">
+{{-- @section('content') --}}
 <div class="container">
     <div class="row justify-content-center">
+        
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header bg-success">{{ __('Register') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
@@ -74,4 +76,4 @@
         </div>
     </div>
 </div>
-@endsection
+{{-- @endsection --}}

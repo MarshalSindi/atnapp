@@ -22,6 +22,7 @@ Route::resource('groupe_electrogene', 'Groupe_electrogeneController');
 Route::resource('relever', 'ReleverController');
 Route::resource('livraison', 'LivraisonController');
 Route::resource('controle', 'ControleController');
+Route::resource('asp', 'AspController');
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');

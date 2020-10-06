@@ -57,23 +57,23 @@ class ReleverController extends Controller
         $relever->qte_relever = $request->input('qte_relever');
         $relever->compteur = $request->input('compteur');
         $site = Site::find($relever->site_id);
+        $qte = ($relever->qte_relever);
         
-
-        // if($relever->qte_relever <= 150){
+        if($relever->qte_relever <= 150){
             
-        //     $sid = 'AC04bc22c67e320f1fd9b92bc9a637eede';
-        //      $token = 'e441d51a5fd08d0c43b68815e697a303'; 
-        //      $client = new Client($sid, $token);
-        //      $client->messages->create(
-        //              '+22794000434',
-        //              [
-        //                  'from'=> '+12564726375', 
-        //                  'body'=> 'Alerte '.$relever->site->nomSite.' a '.$relever->qte_relever.'L'
-        //              ]
-        //              );
-        // }
+            $sid = 'AC04bc22c67e320f1fd9b92bc9a637eede';
+             $token = '867ade41d5333007e97979b1b300f094'; 
+             $client = new Client($sid, $token);
+             $client->messages->create(
+                     '+22794000434',
+                     [
+                         'from'=> '+12564726375', 
+                         'body'=> 'Alerte '.$relever->site->nomSite.' a '.$relever->qte_relever.'L'
+                     ]
+                     );
+        }
         $relever->save();
-         
+        
         if(Livraison::find($relever->site_id))
         {
             $livraison = Livraison::find($relever->site_id)->latest('id')->first();
@@ -90,7 +90,17 @@ class ReleverController extends Controller
             $controle->duree_fonctionnement_ge_jour = $controle->duree_fonctionnement_ge / $controle->duree_conso_jour;
             $controle->conso_site_jour = $controle->conso / $controle->duree_conso_jour;
             $controle->save();
-        } 
+        }
+        else{
+            $livraison = new Livraison;
+            $livraison->site_id = $relever->site_id;
+            $livraison->date_livraison = $relever->date_relever;
+            $livraison->qte_avant = 0;
+            $livraison->qte_livre = $relever->qte_relever;
+            $livraison->total = $livraison->qte_avant + $livraison->qte_livre;
+            $livraison->compteur = $relever->compteur;
+            $livraison->save();
+        }
         
 
         return redirect('/relever');

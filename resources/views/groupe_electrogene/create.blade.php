@@ -7,6 +7,10 @@
         <div class="card-body">
             {!!Form::open(['action'=> 'Groupe_electrogeneController@store', 'method'=>'POST'])!!}
                 <div class="form-group">
+                    {{Form::label('num_serie', 'Numéro de serie')}}
+                    {{Form::text('num_serie', '',['class'=>'form-control', 'placeholder'=>'Numéro de Serie du GE '])}}
+                </div>
+                <div class="form-group">
                     {{Form::label('marque', 'Marque')}}
                     {{Form::text('marque', '',['class'=>'form-control', 'placeholder'=>'Marque du Groupe'])}}
                 </div>

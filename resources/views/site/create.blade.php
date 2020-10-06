@@ -18,6 +18,14 @@
                     {{Form::select('type_site_id', $typesites->pluck('typeSite','id'), null,['class'=>'form-control selectbox'])}}
                 </div> 
                 <div class="form-group">
+                    {{Form::label('longitude', 'Longitude')}}
+                    {{Form::text('longitude', '',['class'=>'form-control', 'placeholder'=>'Longitude'])}}
+                </div>
+                <div class="form-group">
+                    {{Form::label('latitude', 'Latitude')}}
+                    {{Form::text('latitude', '',['class'=>'form-control', 'placeholder'=>'Latitude'])}}
+                </div>
+                <div class="form-group">
                     {{Form::label('field', 'Field')}}
                     {{Form::select('field_id', $fields->pluck('nomField','id'), null,['class'=>'form-control selectbox'])}}
                 </div>

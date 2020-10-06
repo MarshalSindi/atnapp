@@ -40,10 +40,12 @@ class Groupe_electrogeneController extends Controller
         $this->validate($request, [
             'marque'=> 'required',
             'capacite_cuve' => 'required',
+            'num_serie' => 'required',
             'puissance_groupe' => 'required'
         ]);
 
         $groupe = new Groupe_electrogene;
+        $groupe->num_serie = $request->input('num_serie');
         $groupe->marque = $request->input('marque');
         $groupe->capacite_cuve = $request->input('capacite_cuve');
         $groupe->puissance_groupe = $request->input('puissance_groupe');
@@ -86,11 +88,13 @@ class Groupe_electrogeneController extends Controller
     {
         $this->validate($request, [
             'marque' => 'required',
+            'num_serie'=> 'required',
             'capacite_cuve' => 'required',
             'puissance_groupe' => 'required'
         ]);
 
         $groupe_electrogene = Groupe_electrogene::find($id);
+        $groupe_electrogene->num_serie = $request->input('num_serie');
         $groupe_electrogene->marque = $request->input('marque');
         $groupe_electrogene->capacite_cuve = $request->input('capacite_cuve');
         $groupe_electrogene->puissance_groupe= $request->input('puissance_groupe');

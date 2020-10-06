@@ -13,6 +13,10 @@
                         {{Form::label('telephone', 'Téléphone')}}
                         {{Form::text('telephone', $field->telephone,['class'=>'form-control', 'placeholder'=>'téléphone'])}}
                     </div>
+                    <div class="form-group">
+                        {{Form::label('ap', 'Asp')}}
+                        {{Form::select('asp_id', $field->asp->pluck('nomAsp', 'id'), $field->asp_id,['class'=>' selectbox form-control'])}}
+                    </div>
                     {{Form::hidden('_method', 'PUT')}}
                     {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
                     <a href="/field" class="btn btn-warning">Retour</a>

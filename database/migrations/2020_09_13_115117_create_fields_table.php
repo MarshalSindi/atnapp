@@ -17,6 +17,7 @@ class CreateFieldsTable extends Migration
             $table->id();
             $table->string('nomField');
             $table->string('telephone');
+            $table->integer('asp_id');
             $table->timestamps();
         });
     }

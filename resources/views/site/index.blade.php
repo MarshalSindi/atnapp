@@ -12,10 +12,13 @@
             <table id="site_table" class="table  table-bordered  shadow-lg text-center">
                 <thead class=" bg-success text-center">
                     <tr>
+                        <th>Id</th>
                         <th>Région</th>
                         <th>Localité</th>
                         <th>Site</th> 
                         <th>Type Site</th>
+                        <th>Longitude</th>
+                        <th>Latitude</th>
                         <th>Field</th>  
                         <th colspan="2">Action</th>                  
                     </tr>
@@ -24,10 +27,13 @@
                     @foreach ($sites as $site)
                         <tr>
                             
+                            <td>{{$site->id}}</td>
                             <td>{{$site->nomRegion}}</td>
                             <td>{{$site->nomLocalite}}</td>
                             <td>{{$site->nomSite}}</td>
                             <td>{{$site->typeSite}}</td>
+                            <td>{{$site->longitude}}</td>
+                            <td>{{$site->latitude}}</td>
                             <td>{{$site->nomField}}</td>
                             <td><a href="/site/{{$site->id}}/edit" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a></td>
                             <td><a href="" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a></td>

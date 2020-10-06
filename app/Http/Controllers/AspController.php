@@ -1,20 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Field;
-use App\Localite;
-use App\Region;
-use App\Site;
 use App\Asp;
+use Yajra\Datatables\Datatables;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
-class FieldController extends Controller
+class AspController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -22,10 +15,8 @@ class FieldController extends Controller
      */
     public function index()
     {
-        $fields = DB::table('asps')
-                    ->join('fields', 'fields.asp_id', '=', 'asps.id')
-                     ->paginate(10);
-        return view('field.index')->with('fields', $fields)->with('success', 'Cool');
+        $asps = DB::table('asps')->paginate(10);
+        return view('asp.index')->with('asps', $asps);
     }
 
     /**
@@ -35,8 +26,7 @@ class FieldController extends Controller
      */
     public function create()
     {
-        $asps= Asp::all(); 
-        return view('field.create')->with('asps', $asps);
+        return view('asp.create');
     }
 
     /**
@@ -48,17 +38,13 @@ class FieldController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nomField' => 'required',
-            'asp_id' => 'required',
-            'telephone' => 'required|unique:fields'
+            'nomAsp' => 'required'
         ]);
 
-        $field = new Field;
-        $field->nomField = $request->input('nomField');
-        $field->asp_id = $request->input('asp_id');
-        $field->telephone = $request->input('telephone');
-        $field->save();
-        return redirect('/field')->with('success', 'Cool');
+        $asp = new Asp;
+        $asp->nomAsp = $request->input('nomAsp');
+        $asp->save();
+        return redirect('/asp');
     }
 
     /**
@@ -69,8 +55,7 @@ class FieldController extends Controller
      */
     public function show($id)
     {
-        $sites = Field::with('sites')->find($id);           
-        return view('field.show', compact('sites'));
+        //
     }
 
     /**
@@ -81,8 +66,8 @@ class FieldController extends Controller
      */
     public function edit($id)
     {
-        $field = Field::find($id);
-        return view('field.edit')->with('field', $field);
+        $asp = Asp::find($id);
+        return view('asp.edit')->with('asp',$asp);
     }
 
     /**
@@ -95,17 +80,13 @@ class FieldController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'nomField' => 'required',
-            'asp_id' => 'required',
-            'telephone' => 'required'
+            'nomAsp' => 'required'
         ]);
 
-        $field = Field::find($id);
-        $field->nomField = $request->input('nomField');
-        $field->telephone = $request->input('telephone');
-        $field->asp_id = $request->input('asp_id');
-        $field->save();
-        return redirect('/field')->with('success', 'Modification réussis!');
+        $asp = Asp::find($id);
+        $asp->nomAsp = $request->input('nomAsp');
+        $asp->save();
+        return redirect('/asp');
     }
 
     /**

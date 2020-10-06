@@ -23,7 +23,7 @@ class SiteController extends Controller
                 ->join('fields', 'sites.field_id', '=', 'fields.id')
                 ->join('localites', 'sites.localite_id', '=', 'localites.id')
                 ->join('regions', 'localites.region_id', '=', 'regions.id')
-                ->select('sites.id','sites.nomSite','type_sites.typeSite','fields.nomField', 'localites.nomLocalite', 'regions.nomRegion')
+                ->select('sites.id','sites.nomSite','type_sites.typeSite','fields.nomField', 'sites.longitude', 'sites.latitude', 'localites.nomLocalite', 'regions.nomRegion')
                 ->paginate(15);
                 
         return view('site.index')->with('sites', $sites);
@@ -54,7 +54,9 @@ class SiteController extends Controller
             'nomSite'=> 'required',
             'type_site_id' => 'required',
             'field_id' => 'required',
-            'localite_id'=> 'required'
+            'localite_id'=> 'required',
+            'longitude' =>'required',
+            'latitude' => 'required'
         ]);
 
         $site = new Site;
@@ -62,6 +64,8 @@ class SiteController extends Controller
         $site->type_site_id = $request->input('type_site_id');
         $site->field_id = $request->input('field_id');
         $site->localite_id = $request->input('localite_id');
+        $site->longitude = $request->input('longitude');
+        $site->latitude = $request->input('latitude');
 
         //Twilio SMS API
         // $sid = 'AC04bc22c67e320f1fd9b92bc9a637eede';
@@ -114,6 +118,8 @@ class SiteController extends Controller
         $this->validate($request, [
             'nomSite'=> 'required',
             'type_site_id' => 'required',
+            'longitude' => 'required',
+            'latitude' => 'required',
             'field_id' => 'required',
             'localite_id'=> 'required'
         ]);
@@ -123,6 +129,8 @@ class SiteController extends Controller
         $site->type_site_id = $request->input('type_site_id');
         $site->field_id = $request->input('field_id');
         $site->localite_id = $request->input('localite_id');
+        $site->longitude = $request->input('longitude');
+        $site->latitude = $request->input('latitude');
         $site->save();
 
         return redirect('/site');

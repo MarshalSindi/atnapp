@@ -3,9 +3,12 @@
 <link rel="stylesheet" href="{{asset('fontawesome/css/all.css')}}">
 {{-- @section('content') --}}
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8 align-items-center">
-            <div class="card">
+    <div class="column mt-5">
+        <div class="col-md-6 m-auto">
+            <h2 class="text-center">Connexion</h2>
+        </div>
+        <div class="col-md-6 m-auto ">
+            <div class="card shadow-lg">
                 <div class="card-header bg-success"><i class="fas fa-gas-pump"></i> {{ __('EnergeTic') }}</div>
 
                 <div class="card-body">
@@ -16,7 +19,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  autocomplete="email" autofocus>
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">

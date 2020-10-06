@@ -12,7 +12,8 @@
                 <table id="groupe_table" class="table table-bordered rounded shadow-lg text-center">
                     <thead class="text-center bg-success">
                         <tr>
-                            <th>Id</th>
+                            
+                            <th>Numéro de Serie</th>
                             <th>Marque</th>
                             <th>Capacité Cuve (L)</th>
                             <th>Puissance Ge (Kva)</th> 
@@ -22,7 +23,7 @@
                     <tbody>
                         @foreach ($groupes as $groupe)
                             <tr>
-                                <td>{{$groupe->id}}</td>
+                                <td>{{$groupe->num_serie}}</td>
                                 <td>{{$groupe->marque}}</td>
                                 <td>{{$groupe->capacite_cuve}}</td>
                                 <td>{{$groupe->puissance_groupe}}</td>

@@ -6,6 +6,10 @@
             <div class="card-body">
                 {!!Form::open(['action'=> ['Groupe_electrogeneController@update', $groupe_electrogene->id], 'method'=>'POST'])!!}
                     <div class="form-group">
+                        {{Form::label('num_serie', 'Numéro de Serie')}}
+                        {{Form::text('num_serie', $groupe_electrogene->num_serie,['class'=>'form-control', 'placeholder'=>'Marque'])}}
+                    </div>
+                    <div class="form-group">
                         {{Form::label('marque', 'Marque Du Groupe')}}
                         {{Form::text('marque', $groupe_electrogene->marque,['class'=>'form-control', 'placeholder'=>'Marque'])}}
                     </div>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGroupeElectrogenesTable extends Migration
+class CreateAspsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateGroupeElectrogenesTable extends Migration
      */
     public function up()
     {
-        Schema::create('groupe_electrogenes', function (Blueprint $table) {
+        Schema::create('asps', function (Blueprint $table) {
             $table->id();
-            $table->string('num_serie');
-            $table->string('marque');
-            $table->float('puissance_groupe');
-            $table->integer('capacite_cuve');
+            $table->string('nomAsp');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreateGroupeElectrogenesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('groupe_electrogenes');
+        Schema::dropIfExists('asps');
     }
 }
