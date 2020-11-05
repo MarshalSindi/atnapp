@@ -24,7 +24,7 @@ Route::resource('livraison', 'LivraisonController');
 Route::resource('controle', 'ControleController');
 Route::resource('asp', 'AspController');
 Route::resource('role', 'RoleController');
-Route::resource('user', 'UserController');
+Route::resource('admin/user', 'UserController');
 Route::resource('structure', 'StructureController');
 Auth::routes();
 

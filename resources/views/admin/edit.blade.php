@@ -3,8 +3,9 @@
 @section('content')
     <div class="col-md-6 m-auto">
         <div class="card shadow-lg">
+            <div class="card-header">Modifier l'utilisateur {{$user->name}}</div>
             <div class="card-body">
-                {!!Form::open(['action'=> ['Admin\UsersController@update', $user->id], 'method'=>'POST'])!!}
+                {!!Form::open(['action'=> ['UserController@update', $user->id], 'method'=>'POST'])!!}
                     <div class="form-group">
                         {{Form::label('name', 'Name')}}
                         {{Form::text('name', $user->name,['class'=>'form-control', 'placeholder'=>'Nom utilisateur'])}}
@@ -15,7 +16,7 @@
                     </div>
                     <div class="form-group">
                         {{Form::label('name', 'Rôle')}}
-                        {{Form::select('role', $roles->pluck('role', 'id'),null,['class'=>'form-control', 'placeholder'=>'Rôle'])}}
+                        {{Form::select('role_id', $roles->pluck('role', 'id'),null,['class'=>'form-control', 'placeholder'=>'Rôle'])}}
                     </div>
                     {{Form::hidden('_method', 'PUT')}}
                     {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
