@@ -14,6 +14,14 @@
                 {{Form::select('localite_id', $site->localite->pluck('nomLocalite', 'id'), $site->localite_id,['class'=>'form-control selectbox'])}}
             </div>
             <div class="form-group">
+                {{Form::label('type_site', 'Type de Site')}}
+                {{Form::select('type_site_id', $site->typeSite->pluck('typeSite', 'id'), $site->type_site_id,['class'=>'form-control selectbox'])}}
+            </div>
+            <div class="form-group">
+                {{Form::label('structure', 'Structure du Site')}}
+                {{Form::select('structure_id', $site->structure->pluck('structure', 'id'), $site->structure_id,['class'=>'form-control selectbox'])}}
+            </div>
+            <div class="form-group">
                 {{Form::label('longitude', 'Longitude')}}
                 {{Form::text('longitude', $site->longitude,['class'=>'form-control', 'placeholder'=>'Longitude'])}}
             </div>
@@ -21,10 +29,7 @@
                 {{Form::label('latitude', 'Latitude')}}
                 {{Form::text('latitude', $site->latitude,['class'=>'form-control', 'placeholder'=>'Latitude'])}}
             </div>
-            <div class="form-group">
-                {{Form::label('type_site', 'Type de Site')}}
-                {{Form::select('type_site_id', $site->typeSite->pluck('typeSite', 'id'), $site->type_site_id,['class'=>'form-control selectbox'])}}
-            </div>
+            
             
             
             <div class="form-group">

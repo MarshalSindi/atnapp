@@ -18,6 +18,10 @@
                     {{Form::select('type_site_id', $typesites->pluck('typeSite','id'), null,['class'=>'form-control selectbox'])}}
                 </div> 
                 <div class="form-group">
+                    {{Form::label('structure', 'Structure du Site')}}
+                    {{Form::select('structure_id', $structures->pluck('structure','id'), null,['class'=>'form-control selectbox'])}}
+                </div>
+                <div class="form-group">
                     {{Form::label('longitude', 'Longitude')}}
                     {{Form::text('longitude', '',['class'=>'form-control', 'placeholder'=>'Longitude'])}}
                 </div>

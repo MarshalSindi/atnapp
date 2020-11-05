@@ -1,15 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use Carbon\Carbon;
-use App\Site;
-use App\Controle;
-use App\Livraison;
-use App\Relever;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Http\Request;
 
-class ControleController extends Controller
+use Illuminate\Http\Request;
+use App\Structure;
+
+class StructureController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,10 +14,8 @@ class ControleController extends Controller
      */
     public function index()
     {
-        $controles = DB::table('sites')
-                    ->join('controles', 'controles.site_id', '=', 'sites.id')
-                    ->paginate(15);
-        return view('controle.index')->with('controles', $controles);
+        $structures = Structure::all();
+        return view('structure.index')->with('structures', $structures);
     }
 
     /**
@@ -31,7 +25,7 @@ class ControleController extends Controller
      */
     public function create()
     {
-        //
+        return view('structure.create');
     }
 
     /**
@@ -42,7 +36,14 @@ class ControleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'structure' => 'required'
+        ]);
+
+        $structure = new Structure;
+        $structure->structure = $request->input('structure');
+        $structure->save();
+        return redirect('/structure');
     }
 
     /**
@@ -64,7 +65,8 @@ class ControleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $structure = Structure::find($id);
+        return view('structure.edit')->with('structure', $structure);
     }
 
     /**
@@ -76,7 +78,14 @@ class ControleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'structure' => 'required'
+        ]);
+
+        $structure =Structure::find($id);
+        $structure->structure = $request->input('structure');
+        $structure->save();
+        return redirect('/structure');
     }
 
     /**

@@ -17,10 +17,11 @@
                         <th>Localité</th>
                         <th>Site</th> 
                         <th>Type Site</th>
+                        <th>Structure Site</th>
                         <th>Longitude</th>
                         <th>Latitude</th>
                         <th>Field</th>  
-                        <th colspan="2">Action</th>                  
+                        <th colspan="3">Action</th>                  
                     </tr>
                 </thead>
                 <tbody>
@@ -32,10 +33,12 @@
                             <td>{{$site->nomLocalite}}</td>
                             <td>{{$site->nomSite}}</td>
                             <td>{{$site->typeSite}}</td>
+                            <td>{{$site->structure}}</td>
                             <td>{{$site->longitude}}</td>
                             <td>{{$site->latitude}}</td>
                             <td>{{$site->nomField}}</td>
                             <td><a href="/site/{{$site->id}}/edit" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a></td>
+                            <td><a href="/site/{{$site->id}}/show" class="btn btn-success btn-sm"><i class="fas fa-calendar"></i></a></td>
                             <td><a href="" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a></td>
                         </tr>
                     @endforeach

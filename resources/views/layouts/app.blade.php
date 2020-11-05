@@ -20,6 +20,12 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('fontawesome/css/all.css')}}">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>
+   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
 </head>
 <body>
     <div id="app">
@@ -53,7 +59,7 @@
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                                   <i class="fas fa-users-cog"></i> {{ Auth::user()->name }}
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -66,8 +72,12 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
+                                    <a href="{{route('user.index')}}" class="dropdown-item">
+                                        Utilisateur
+                                    </a>
                                 </div>
                             </li>
+                           
                         @endguest
                     </ul>
                 </div>
@@ -128,6 +138,12 @@
                                 <a class="nav-link text-dark" href="/typesite">
                                     <span data-feather="shopping-cart"></span>
                                    <i class="fas fa-solar-panel text-success"></i> Types de Site
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="/structure">
+                                    <span data-feather="shopping-cart"></span> 
+                                   <i class="fas fa-cogs text-success"></i> Structure du Site
                                 </a>
                             </li>
                             <li class="nav-item">

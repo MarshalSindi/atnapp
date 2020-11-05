@@ -1,15 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use Carbon\Carbon;
-use App\Site;
-use App\Controle;
-use App\Livraison;
-use App\Relever;
-use Illuminate\Support\Facades\DB;
+use App\Role;
+use App\User;
 use Illuminate\Http\Request;
 
-class ControleController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,10 +14,8 @@ class ControleController extends Controller
      */
     public function index()
     {
-        $controles = DB::table('sites')
-                    ->join('controles', 'controles.site_id', '=', 'sites.id')
-                    ->paginate(15);
-        return view('controle.index')->with('controles', $controles);
+        $roles = Role::all();
+        return view('role.index')->with('roles', $roles);
     }
 
     /**
@@ -31,7 +25,7 @@ class ControleController extends Controller
      */
     public function create()
     {
-        //
+        return view('role.create');
     }
 
     /**
@@ -42,7 +36,13 @@ class ControleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'role'=> 'required'
+        ]);
+        $role = new Role;
+        $role->role = $request->input('role');
+        $role->save();
+        return redirect('/role');
     }
 
     /**
@@ -64,7 +64,8 @@ class ControleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $role = Role::find($id);
+        return view('role.edit')->with('role', $role);
     }
 
     /**
@@ -76,7 +77,16 @@ class ControleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+
+            'role' => 'required'
+
+        ]);
+
+        $role =  Role::find($id);
+        $role->role = $request->input('role');
+        $role->save();
+        return redirect('/role');
     }
 
     /**

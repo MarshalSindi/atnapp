@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Site;
 use App\Type_site;
 use App\Field;
+use App\Structure;
 use App\Localite;
 use Illuminate\Support\Facades\DB;
 use Twilio\Rest\Client;
@@ -22,8 +23,9 @@ class SiteController extends Controller
                 ->join('type_sites', 'sites.type_site_id', '=', 'type_sites.id')
                 ->join('fields', 'sites.field_id', '=', 'fields.id')
                 ->join('localites', 'sites.localite_id', '=', 'localites.id')
+                ->join('structures', 'sites.structure_id', '=', 'structures.id')
                 ->join('regions', 'localites.region_id', '=', 'regions.id')
-                ->select('sites.id','sites.nomSite','type_sites.typeSite','fields.nomField', 'sites.longitude', 'sites.latitude', 'localites.nomLocalite', 'regions.nomRegion')
+                ->select('sites.id','sites.nomSite','type_sites.typeSite','fields.nomField', 'structures.structure', 'sites.longitude', 'sites.latitude', 'localites.nomLocalite', 'regions.nomRegion')
                 ->paginate(15);
                 
         return view('site.index')->with('sites', $sites);
@@ -38,8 +40,9 @@ class SiteController extends Controller
     {
         $fields = Field::select('id', 'nomField')->get();
         $typesites = Type_site::select('id', 'typeSite')->get();
+        $structures = Structure::select('id', 'structure')->get();
         $localites = Localite::select('id', 'nomLocalite')->get();
-        return view('site.create', compact('localites','typesites','fields'));
+        return view('site.create', compact('localites','typesites','fields', 'structures'));
     }
 
     /**
@@ -53,6 +56,7 @@ class SiteController extends Controller
         $this->validate($request, [
             'nomSite'=> 'required',
             'type_site_id' => 'required',
+            'structure_id' => 'required',
             'field_id' => 'required',
             'localite_id'=> 'required',
             'longitude' =>'required',
@@ -62,6 +66,7 @@ class SiteController extends Controller
         $site = new Site;
         $site->nomSite = $request->input('nomSite');
         $site->type_site_id = $request->input('type_site_id');
+        $site->structure_id = $request->input('structure_id');
         $site->field_id = $request->input('field_id');
         $site->localite_id = $request->input('localite_id');
         $site->longitude = $request->input('longitude');
@@ -118,6 +123,7 @@ class SiteController extends Controller
         $this->validate($request, [
             'nomSite'=> 'required',
             'type_site_id' => 'required',
+            'structure_id' => 'required',
             'longitude' => 'required',
             'latitude' => 'required',
             'field_id' => 'required',
@@ -128,6 +134,7 @@ class SiteController extends Controller
         $site->nomSite = $request->input('nomSite');
         $site->type_site_id = $request->input('type_site_id');
         $site->field_id = $request->input('field_id');
+        $site->structure_id = $request->input('structure_id');
         $site->localite_id = $request->input('localite_id');
         $site->longitude = $request->input('longitude');
         $site->latitude = $request->input('latitude');

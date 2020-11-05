@@ -56,51 +56,84 @@ class ReleverController extends Controller
         $relever->date_relever = $request->input('date_relever');
         $relever->qte_relever = $request->input('qte_relever');
         $relever->compteur = $request->input('compteur');
-        $site = Site::find($relever->site_id);
-        $qte = ($relever->qte_relever);
-        
-        if($relever->qte_relever <= 150){
-            
-            $sid = 'AC04bc22c67e320f1fd9b92bc9a637eede';
-             $token = '867ade41d5333007e97979b1b300f094'; 
-             $client = new Client($sid, $token);
-             $client->messages->create(
-                     '+22794000434',
-                     [
-                         'from'=> '+12564726375', 
-                         'body'=> 'Alerte '.$relever->site->nomSite.' a '.$relever->qte_relever.'L'
-                     ]
-                     );
-        }
-        $relever->save();
-        
-        if(Livraison::find($relever->site_id))
-        {
-            $livraison = Livraison::find($relever->site_id)->latest('id')->first();
+        $site =DB::table('relevers')
+                ->where('site_id', $relever->site_id)
+                ->latest()
+                ->first();
+       
+      //  dd($site->compteur);
+        if($site){
             $date2=\Carbon\Carbon::parse($relever->date_relever);
-            $date1= \Carbon\Carbon::parse($livraison->date_livraison);
-          
+            $date1= \Carbon\Carbon::parse($site->date_relever);
             $controle = new Controle;
             $controle->site_id = $relever->site_id;
-            $controle->conso =  $livraison->total - $relever->qte_relever;
+            $controle->semaine1 = $date1;
+         //   dd($controle->semaine1);
+            $controle->semaine2 = $date2;
+            $controle->conso = $site->qte_relever - $relever->qte_relever; 
             $controle->duree_conso_jour = $date1->diffInDays($date2, false);
-            
-            $controle->duree_fonctionnement_ge = $relever->compteur - $livraison->compteur;
+            $controle->duree_fonctionnement_ge = $relever->compteur - $site->compteur;
             $controle->conso_moyenne = $controle->conso / $controle->duree_fonctionnement_ge;
             $controle->duree_fonctionnement_ge_jour = $controle->duree_fonctionnement_ge / $controle->duree_conso_jour;
-            $controle->conso_site_jour = $controle->conso / $controle->duree_conso_jour;
+            $controle->conso_site_jour =$controle->conso / $controle->duree_conso_jour;
+            $controle->dure_conso_restant = $site->qte_relever / $controle->conso_site_jour;  
+            $controle->date_rupture = $date1->copy()->addDay($controle->dure_conso_restant) ;
+        
             $controle->save();
+            $relever->save();
         }
         else{
-            $livraison = new Livraison;
-            $livraison->site_id = $relever->site_id;
-            $livraison->date_livraison = $relever->date_relever;
-            $livraison->qte_avant = 0;
-            $livraison->qte_livre = $relever->qte_relever;
-            $livraison->total = $livraison->qte_avant + $livraison->qte_livre;
-            $livraison->compteur = $relever->compteur;
-            $livraison->save();
+            $relever->save();
         }
+         // $controle->conso =  $livraison->total - $relever->qte_relever;
+        //     $controle->duree_conso_jour = $date1->diffInDays($date2, false);
+            
+        //     $controle->duree_fonctionnement_ge = $relever->compteur - $livraison->compteur;
+        //     $controle->conso_moyenne = $controle->conso / $controle->duree_fonctionnement_ge;
+        //     $controle->duree_fonctionnement_ge_jour = $controle->duree_fonctionnement_ge / $controle->duree_conso_jour;
+        //     $controle->conso_site_jour = $controle->conso / $controle->duree_conso_jour;
+        // if($relever->qte_relever <= 150){
+            
+        //     $sid = 'AC04bc22c67e320f1fd9b92bc9a637eede';
+        //      $token = '867ade41d5333007e97979b1b300f094'; 
+        //      $client = new Client($sid, $token);
+        //      $client->messages->create(
+        //              '+22794000434',
+        //              [
+        //                  'from'=> '+12564726375', 
+        //                  'body'=> 'Alerte '.$relever->site->nomSite.' a '.$relever->qte_relever.'L'
+        //              ]
+        //              );
+        // }
+      
+        
+        // if(Livraison::find($relever->site_id))
+        // {
+        //     $livraison = Livraison::find($relever->site_id)->latest('id')->first();
+        //     $date2=\Carbon\Carbon::parse($relever->date_relever);
+        //     $date1= \Carbon\Carbon::parse($livraison->date_livraison);
+          
+        //     $controle = new Controle;
+        //     $controle->site_id = $relever->site_id;
+        //     $controle->conso =  $livraison->total - $relever->qte_relever;
+        //     $controle->duree_conso_jour = $date1->diffInDays($date2, false);
+            
+        //     $controle->duree_fonctionnement_ge = $relever->compteur - $livraison->compteur;
+        //     $controle->conso_moyenne = $controle->conso / $controle->duree_fonctionnement_ge;
+        //     $controle->duree_fonctionnement_ge_jour = $controle->duree_fonctionnement_ge / $controle->duree_conso_jour;
+        //     $controle->conso_site_jour = $controle->conso / $controle->duree_conso_jour;
+        //     $controle->save();
+        // }
+        // else{
+        //     $livraison = new Livraison;
+        //     $livraison->site_id = $relever->site_id;
+        //     $livraison->date_livraison = $relever->date_relever;
+        //     $livraison->qte_avant = 0;
+        //     $livraison->qte_livre = $relever->qte_relever;
+        //     $livraison->total = $livraison->qte_avant + $livraison->qte_livre;
+        //     $livraison->compteur = $relever->compteur;
+        //     $livraison->save();
+        // }
         
 
         return redirect('/relever');

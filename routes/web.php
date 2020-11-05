@@ -23,6 +23,10 @@ Route::resource('relever', 'ReleverController');
 Route::resource('livraison', 'LivraisonController');
 Route::resource('controle', 'ControleController');
 Route::resource('asp', 'AspController');
+Route::resource('role', 'RoleController');
+Route::resource('user', 'UserController');
+Route::resource('structure', 'StructureController');
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::get('/carte', 'HomeController@carte');

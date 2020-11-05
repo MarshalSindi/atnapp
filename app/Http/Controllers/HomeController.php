@@ -33,4 +33,9 @@ class HomeController extends Controller
                     ->paginate(15);
         return view('home')->with('livraisons', $livraisons);
     }
+
+    public function carte()
+    {
+        return view('layouts.carte');
+    }
 }

@@ -14,6 +14,10 @@ class Site extends Model
         return $this->belongsTo('App\Type_site');
     }
 
+    public function Structure(){
+        return $this->belongsTo('App\Structure');
+    }
+
     public function localite(){
         return $this->belongsTo('App\Localite');
     }

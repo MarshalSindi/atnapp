@@ -1,15 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use Carbon\Carbon;
-use App\Site;
-use App\Controle;
-use App\Livraison;
-use App\Relever;
-use Illuminate\Support\Facades\DB;
+use App\User;
+use App\Role;
+use DB;
 use Illuminate\Http\Request;
 
-class ControleController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,10 +15,8 @@ class ControleController extends Controller
      */
     public function index()
     {
-        $controles = DB::table('sites')
-                    ->join('controles', 'controles.site_id', '=', 'sites.id')
-                    ->paginate(15);
-        return view('controle.index')->with('controles', $controles);
+        $users = User::all();
+        return view('admin.index')->with('users', $users);
     }
 
     /**
