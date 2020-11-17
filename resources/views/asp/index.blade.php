@@ -21,8 +21,8 @@
                        <tr>
                             <td>{{$asp->id}}</td>
                             <td>{{$asp->nomAsp}}</td>
-                            <td><a href="asp/{{$asp->id}}/edit" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a></td>
-                            <td><a href="asp/{{$asp->id}}/edit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a></td>
+                            <td><a href="asp/{{$asp->id}}/edit" class="text-info"><i class="fas fa-edit"></i></a></td>
+                            <td><a href="asp/{{$asp->id}}/edit" class="text-danger"><i class="fas fa-trash"></i></a></td>
                        </tr>
                    @endforeach
                 </tbody>

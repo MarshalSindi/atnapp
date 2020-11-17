@@ -19,6 +19,7 @@ class CreateReleversTable extends Migration
             $table->date('date_relever');
             $table->float('qte_relever');
             $table->integer('compteur');
+            $table->longText('observation')->nullable();
             $table->timestamps();
         });
     }

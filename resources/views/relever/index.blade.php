@@ -16,7 +16,8 @@
                         <th>Site</th>
                         <th>Date Relever</th>
                         <th>Niveau Cuve (L)</th>
-                        <th>Heure de Marche (H)</th>  
+                        <th>Heure de Marche (H)</th>
+                        <th>Observation</th>  
                         <th colspan="2">Action</th>                  
                     </tr>
                 </thead>
@@ -28,8 +29,9 @@
                         <td>{{$relever->date_relever}}</td>
                         <td>{{$relever->qte_relever}}</td>
                         <td>{{$relever->compteur}}</td>
-                        <td><a href="/relever/{{$relever->id}}/edit" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a></td>
-                        <td><a href="/relever/{{$relever->id}}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a></td>
+                        <td>{{$relever->observation}}</td>
+                        <td><a href="/relever/{{$relever->id}}/edit" class="text-info"><i class="fas fa-edit"></i></a></td>
+                        <td><a href="/relever/{{$relever->id}}" class="text-danger"><i class="fas fa-trash"></i></a></td>
                       </tr>
                   @endforeach
                 </tbody>

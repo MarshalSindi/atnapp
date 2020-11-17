@@ -23,8 +23,8 @@
                             <td>{{$localite->id}}</td>
                             <td>{{$localite->nomLocalite}}</td>
                             <td>{{$localite->nomRegion}}</td>
-                            <td><a href="/localite/{{$localite->id}}/edit" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a></td>
-                            <td><a href="" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a></td>
+                            <td><a href="/localite/{{$localite->id}}/edit" class="text-info"><i class="fas fa-edit"></i></a></td>
+                            <td><a href="/localite/{{$localite->id}}/edit" class="text-danger"><i class="fas fa-trash"></i></a></td>
                         </tr>
                     @endforeach
                 </tbody>

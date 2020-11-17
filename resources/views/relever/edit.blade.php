@@ -21,6 +21,10 @@
                     {{Form::label('compteur', 'Heure de Marche (H)')}}
                     {{Form::text('compteur', $relever->compteur,['class'=>'form-control', 'placeholder'=>'Heure de Marche'])}}
                 </div>
+                <div class="form-group">
+                    {{Form::label('observation', 'Observation')}}
+                    {{Form::text('observation', $relever->observation,['class'=>'form-control', 'placeholder'=>'Observation'])}}
+                </div>
                 {{Form::hidden('_method', 'PUT')}}
                 {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
                 <a href="/relever" class="btn btn-warning">Retour</a>

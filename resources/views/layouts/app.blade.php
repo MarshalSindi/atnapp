@@ -28,7 +28,15 @@
    crossorigin=""></script>
 </head>
 <body>
-    <div id="app">
+    <style>
+        .rounded-circle{
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            border-radius: 15px;
+        }
+    </style>
+    <div id="app" >
         <nav class="navbar navbar-expand-md navbar-light bg-success shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -72,9 +80,7 @@
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
-                                    <a href="{{route('user.index')}}" class="dropdown-item">
-                                        Utilisateur
-                                    </a>
+                                   
                                 </div>
                             </li>
                            
@@ -85,7 +91,7 @@
         </nav>
         <div class="container-fluid">
             <div class="row">
-                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block shadow bg-light sidebar collapse">
+                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block shadow bg-light sidebar collapse ">
                     <div class="sidebar-sticky pt-3">
                         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
                             <span class="btn btn-success text-white">Tableau de Bord</span>
@@ -174,6 +180,8 @@
             </main>
         </div>
           </div>
+        </div>
+      
 </body>
     <script src="{{asset('jquery.min.js')}}"></script>
     {{-- <script src="{{asset('js/popper.min.js')}}"></script> --}}

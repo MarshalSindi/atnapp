@@ -1,12 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Site;
-use App\Relever;
-use App\Livraison;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class HomeController extends Controller
 {
@@ -27,15 +26,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-        
-        $livraisons = DB::table('livraisons')
-                    ->join('sites', 'livraisons.site_id', '=', 'sites.id')
-                    ->paginate(15);
-        return view('home')->with('livraisons', $livraisons);
+    // $role = Role::create(['name'=>'admin']);
+    // $permission = Permission::create(['name'=>'add user']);
+    // auth()->user()->givePermissionTo('edit post');
+    // auth()->user()->assignRole('admin');
+        return view('home');
     }
 
-    public function carte()
-    {
-        return view('layouts.carte');
-    }
+    // public function carte()
+    // {
+    //     return view('layouts.carte');
+    // }
 }

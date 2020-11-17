@@ -21,6 +21,7 @@ class CreateLivraisonsTable extends Migration
             $table->float('qte_livre');
             $table->integer('compteur');
             $table->integer('total');
+            $table->longText('observation');
             $table->timestamps();
         });
     }

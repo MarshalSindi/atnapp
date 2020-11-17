@@ -22,7 +22,7 @@ class CreateControlesTable extends Migration
             $table->integer('duree_conso_jour');
             $table->integer('duree_fonctionnement_ge');
             $table->float('conso_moyenne');
-            $table->integer('duree_fonctionnement_ge_jour');
+            $table->float('duree_fonctionnement_ge_jour');
             $table->float('conso_site_jour');
             $table->integer('dure_conso_restant');
             $table->date('date_rupture');

@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 use App\Site;
 use App\Type_site;
 use App\Field;
+use App\Region;
 use App\Structure;
 use App\Localite;
+use App\Controle;
 use Illuminate\Support\Facades\DB;
 use Twilio\Rest\Client;
 use Illuminate\Http\Request;
@@ -96,7 +98,8 @@ class SiteController extends Controller
      */
     public function show($id)
     {
-        //
+        $sites = Site::with('controles')->find($id);
+        return view('site.show')->with('sites', $sites);
     }
 
     /**

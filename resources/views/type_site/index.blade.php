@@ -1,6 +1,7 @@
 @extends('layouts.app')
-
+{{-- @livewireStyles --}}
 @section('content')
+ {{-- @livewire('counter')  --}}
     <h4>Type Sites:</h4>
     
     <div class="row">
@@ -21,14 +22,15 @@
                         <tr>
                             <td>{{$typesite->id}}</td>
                             <td>{{$typesite->typeSite}}</td>
-                            <td><a href="typesite/{{$typesite->id}}/edit" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a></td>
-                            <td><a href="typesite/{{$typesite->id}}/edit" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a></td>
+                            <td><a href="typesite/{{$typesite->id}}/edit" class="text-info"><i class="fas fa-edit"></i></a></td>
+                            <td><a href="typesite/{{$typesite->id}}/edit" class="text-danger"><i class="fas fa-trash"></i></a></td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
     </div>
+    {{-- @livewireScripts --}}
 @endsection
 
 @section('script')

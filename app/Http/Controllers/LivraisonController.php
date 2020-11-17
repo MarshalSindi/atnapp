@@ -60,6 +60,7 @@ class LivraisonController extends Controller
         $livraison->qte_livre = $request->input('qte_livre');
         $livraison->total = $livraison->qte_avant + $livraison->qte_livre;
         $livraison->compteur = $request->input('compteur');
+        $livraison->observation = $request->input('observation');
         $livraison->save();
 
         return redirect('/livraison');
@@ -84,7 +85,8 @@ class LivraisonController extends Controller
      */
     public function edit($id)
     {
-        //
+        $livraison=Livraison::find($id);
+        return view('livraison.edit')->with('livraison', $livraison);
     }
 
     /**
@@ -96,7 +98,25 @@ class LivraisonController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'site_id'=> 'required',
+            'date_livraison' => 'required',
+            'qte_avant' => 'required',
+            'qte_livre' => 'required',
+            'compteur'=> 'required'
+        ]);
+
+        $livraison =Livraison::find($id);
+        $livraison->site_id = $request->input('site_id');
+        $livraison->date_livraison = $request->input('date_livraison');
+        $livraison->qte_avant = $request->input('qte_avant');
+        $livraison->qte_livre = $request->input('qte_livre');
+        $livraison->total = $livraison->qte_avant + $livraison->qte_livre;
+        $livraison->compteur = $request->input('compteur');
+        $livraison->observation = $request->input('observation');
+        $livraison->save();
+
+        return redirect('/livraison');
     }
 
     /**

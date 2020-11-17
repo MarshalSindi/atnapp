@@ -37,9 +37,9 @@
                             <td>{{$site->longitude}}</td>
                             <td>{{$site->latitude}}</td>
                             <td>{{$site->nomField}}</td>
-                            <td><a href="/site/{{$site->id}}/edit" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a></td>
-                            <td><a href="/site/{{$site->id}}/show" class="btn btn-success btn-sm"><i class="fas fa-calendar"></i></a></td>
-                            <td><a href="" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a></td>
+                            <td><a href="/site/{{$site->id}}/edit" class="text-info"><i class="fas fa-edit"></i></a></td>
+                            <td><a href="/site/{{$site->id}}" class="text-warning"><i class="fas fa-history"></i></a></td>
+                            <td><a href="" class="text-danger"><i class="fas fa-trash"></i></a></td>
                         </tr>
                     @endforeach
                 </tbody>

@@ -18,6 +18,7 @@
                         <th>Niveau Cuve (Avant)</th>
                         <th>Niveau Cuve (Après)</th>
                         <th>Heure de Marche (H)</th>
+                        <th>Observation</th>
                         <th colspan="2">Action</th>                  
                     </tr>
                 </thead>
@@ -30,8 +31,9 @@
                             <td>{{$livraison->qte_avant}}</td>
                             <td>{{$livraison->total}}</td>
                             <td>{{$livraison->compteur}}</td>
-                            <td><a href="/livraison/{{$livraison->id}}/edit" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a></td>
-                            <td><a href="/livraison/{{$livraison->id}}" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a></td>   
+                            <td>{{$livraison->observation}}</td>
+                            <td><a href="/livraison/{{$livraison->id}}/edit" class="text-info"><i class="fas fa-edit"></i></a></td>
+                            <td><a href="/livraison/{{$livraison->id}}" class="text-danger"><i class="fas fa-trash"></i></a></td>   
                         </tr>
                     @endforeach
                 </tbody>

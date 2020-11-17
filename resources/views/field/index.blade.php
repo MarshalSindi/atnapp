@@ -26,9 +26,9 @@
                             <td>{{$field->nomField}}</td>
                             <td>{{$field->telephone}}</td>
                             <td>{{$field->nomAsp}}</td>
-                            <td><a href="/field/{{$field->id}}/edit" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a></td>
-                            <td><a href="/field/{{$field->id}}" class="btn btn-warning btn-sm"><i class="fas fa-broadcast-tower"></i></a></td>
-                            <td><a href="/field/{{$field->id}}/delete" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></a></td>
+                            <td><a href="/field/{{$field->id}}/edit" class="text-info"><i class="fas fa-edit"></i></a></td>
+                            <td><a href="/field/{{$field->id}}" class="text-warning"><i class="fas fa-broadcast-tower"></i></a></td>
+                            <td><a href="/field/{{$field->id}}/delete" class="text-danger"><i class="fas fa-trash"></i></a></td>
                         </tr>
                     @endforeach
                 </tbody>
